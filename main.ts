@@ -8,9 +8,6 @@ if (!endpoint) {
 	throw new Error("SHEET_ENDPOINT environment variable is not set");
 }
 
-const response = await fetch(endpoint);
-const { data } = await response.json();
-
 // @ts-ignore Deno.cron is unstable, run with --unstable-cron flag
 Deno.cron("QOTD", Deno.env.get("CRON_STRING"), async () => {
 	// Open KV and get last index
@@ -22,6 +19,9 @@ Deno.cron("QOTD", Deno.env.get("CRON_STRING"), async () => {
 	);
 	const result = await kv.get<number>(["lastIndex"]);
 	let index = result.value ?? 0;
+
+	const response = await fetch(endpoint);
+	const { data } = await response.json();
 
 	await sendDiscordNotification(data[index].question);
 	console.log(`Cron: posted question of index ${index} to Discord.`);
