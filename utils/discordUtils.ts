@@ -6,7 +6,7 @@ export async function sendDiscordNotification(quote: string) {
 	const embed = {
 		title: "❓❔ Question of the Day ❓❔",
 		color: 0xFEF250, // lemon yellow
-        description: quote,
+		description: quote,
 		//timestamp: new Date().toISOString(),
 	};
 
