@@ -11,11 +11,10 @@ steps:
     environment:
       DENO_DEPLOY_PROJECT: discord-qotd-webhook
       DENO_DEPLOY_ENTRYPOINT: main.ts
-      DENO_DEPLOY_ROOT: .
     command: |
       # 1. Install deployctl and add it to the path for the next command
       export PATH="$HOME/.deno/bin:$PATH"
       deno install -gArf jsr:@deno/deployctl
 
       # 2. Deploy project
-      deployctl deploy --project=$DENO_DEPLOY_PROJECT --entrypoint=$DENO_DEPLOY_ENTRYPOINT --root=$DENO_DEPLOY_ROOT --token=$DENO_DEPLOY_TOKEN
+      deployctl deploy --project=$DENO_DEPLOY_PROJECT --entrypoint=$DENO_DEPLOY_ENTRYPOINT
